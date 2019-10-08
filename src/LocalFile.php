@@ -2,6 +2,8 @@
 
 namespace Mrself\File;
 
+use Mrself\File\Options\LocalFileOptions;
+
 class LocalFile extends AbstractFile implements FileInterface
 {
     /**
