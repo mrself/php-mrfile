@@ -2,7 +2,7 @@
     "name": "mrself/mrfile",
     "type": "project",
     "license": "MIT",
-    "description": "Symfony package for form tree type",
+    "description": "Facade for working with file on different hosting types",
     "require": {
         "php": "^7.2.0",
         "aws/aws-sdk-php": "^3.112",
