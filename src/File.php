@@ -12,6 +12,9 @@ class File
     public function save($remotePath, string $localPath)
     {
         $class = ClassDefiner::make()->parse($remotePath);
+        if (is_array($remotePath)) {
+            unset($remotePath['type'], $remotePath['class']);
+        }
         /** @var AbstractFileOptions $optionsClass */
         $optionsClass = $class . 'Options';
         $optionsClass = str_replace('File\\', 'File\\Options\\', $optionsClass);

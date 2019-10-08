@@ -9,13 +9,13 @@ class ClassDefiner
 {
     use WithOptionsTrait;
 
-    public function parse(&$source)
+    public function parse($source)
     {
         if (is_array($source)) {
             return $this->parseArraySource($source);
         }
 
-        if (strpos('//', $source) === false) {
+        if (strpos($source, '//') === false) {
             if (file_exists($source)) {
                 return LocalFile::class;
             } else {
@@ -26,7 +26,7 @@ class ClassDefiner
         }
     }
 
-    protected function parseArraySource(array &$source)
+    protected function parseArraySource(array $source)
     {
         if (isset($source['type'])) {
             $class = static::getTypesMap()[$source['type']];
@@ -43,12 +43,14 @@ class ClassDefiner
     {
         return [
             'ftp' => FtpFile::class,
+            'http' => HttpFile::class,
             'local' => LocalFile::class
         ];
     }
 
     protected function defineClass(string $source)
     {
-        // @todo
+        [$schema] = explode('://', $source, 2);
+        return static::getTypesMap()[$schema];
     }
 }
