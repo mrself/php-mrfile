@@ -12,9 +12,7 @@ class ClassDefiner
     public function parse(&$source)
     {
         if (is_array($source)) {
-            $class = $source['class'];
-            unset($source['class']);
-            return $class;
+            return $this->parseArraySource($source);
         }
 
         if (strpos('//', $source) === false) {
@@ -26,6 +24,27 @@ class ClassDefiner
         } else {
             return $this->defineClass($source);
         }
+    }
+
+    protected function parseArraySource(array &$source)
+    {
+        if (isset($source['type'])) {
+            $class = static::getTypesMap()[$source['type']];
+            unset($source['type']);
+            return $class;
+        } else {
+            $class = $source['class'];
+            unset($source['class']);
+            return $class;
+        }
+    }
+
+    protected static function getTypesMap(): array
+    {
+        return [
+            'ftp' => FtpFile::class,
+            'local' => LocalFile::class
+        ];
     }
 
     protected function defineClass(string $source)

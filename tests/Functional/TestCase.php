@@ -3,6 +3,8 @@
 namespace Mrself\File\Tests\Functional;
 
 use Composer\Autoload\ClassLoader;
+use Mrself\Container\Registry\ContainerRegistry;
+use Mrself\File\FileProvider;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
@@ -24,6 +26,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
+        ContainerRegistry::reset();
+        (new FileProvider())->register();
         if (is_dir($this->getFilesDir())) {
             $this->clearFilesDir();
         } else {
