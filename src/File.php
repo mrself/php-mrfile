@@ -9,6 +9,12 @@ class File
 {
     use WithOptionsTrait;
 
+    /**
+     * @param $source
+     * @param string $localPath
+     * @return mixed|void
+     * @throws Exception\InvalidPathLocallyException
+     */
     public function save($source, string $localPath)
     {
         $class = ClassDefiner::make()->parse($source);

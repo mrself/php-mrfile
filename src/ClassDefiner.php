@@ -9,7 +9,12 @@ class ClassDefiner
 {
     use WithOptionsTrait;
 
-    public function parse($source)
+    /**
+     * @param array|string $source
+     * @return string
+     * @throws InvalidPathLocallyException
+     */
+    public function parse($source): string
     {
         if (is_array($source)) {
             return $this->parseArraySource($source);
@@ -26,7 +31,7 @@ class ClassDefiner
         }
     }
 
-    protected function parseArraySource(array $source)
+    protected function parseArraySource(array $source): string
     {
         if (isset($source['type'])) {
             $class = static::getTypesMap()[$source['type']];
@@ -48,7 +53,7 @@ class ClassDefiner
         ];
     }
 
-    protected function defineClass(string $source)
+    protected function defineClass(string $source): string
     {
         [$schema] = explode('://', $source, 2);
         return static::getTypesMap()[$schema];
