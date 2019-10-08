@@ -9,16 +9,16 @@ class File
 {
     use WithOptionsTrait;
 
-    public function save($remotePath, string $localPath)
+    public function save($source, string $localPath)
     {
-        $class = ClassDefiner::make()->parse($remotePath);
-        if (is_array($remotePath)) {
-            unset($remotePath['type'], $remotePath['class']);
+        $class = ClassDefiner::make()->parse($source);
+        if (is_array($source)) {
+            unset($source['type'], $source['class']);
         }
         /** @var AbstractFileOptions $optionsClass */
         $optionsClass = $class . 'Options';
         $optionsClass = str_replace('File\\', 'File\\Options\\', $optionsClass);
-        $options = $optionsClass::make($remotePath)->build();
+        $options = $optionsClass::make($source)->build();
         /** @var FileInterface $class */
         return $class::make()
             ->save($options, $localPath);
