@@ -26,7 +26,6 @@ class File
         $optionsClass = str_replace('File\\', 'File\\Options\\', $optionsClass);
         $options = $optionsClass::make($source)->build();
         /** @var FileInterface $class */
-        return $class::make()
-            ->save($options, $localPath);
+        return $class::make()->save($options, $localPath);
     }
 }
