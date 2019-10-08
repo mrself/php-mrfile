@@ -5,6 +5,7 @@
     "description": "Symfony package for form tree type",
     "require": {
         "php": "^7.2.0",
+        "kunalvarma05/dropbox-php-sdk": "^0.2.1",
         "mrself/container": "^1.7",
         "mrself/options": "^2.14",
         "nicolab/php-ftp-client": "^1.5"
