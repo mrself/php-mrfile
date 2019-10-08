@@ -9,5 +9,5 @@ interface FileInterface
      */
     public static function make();
 
-    public function save($remotePath, string $localPath);
+    public function save($options, string $localPath);
 }
