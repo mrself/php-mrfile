@@ -19,6 +19,48 @@ class S3FileOptions extends AbstractFileOptions
     protected $key;
 
     /**
+     * @Option()
+     * @var string
+     */
+    protected $version;
+
+    /**
+     * @Option()
+     * @var string
+     */
+    protected $region;
+
+    /**
+     * @Option()
+     * @var array
+     */
+    protected $credentials;
+
+    /**
+     * @return string
+     */
+    public function getVersion(): ?string
+    {
+        return $this->version;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCredentials(): ?array
+    {
+        return $this->credentials;
+    }
+
+    /**
      * @return string
      */
     public function getBucket(): ?string

@@ -21,7 +21,17 @@ class S3File extends AbstractFile implements FileInterface
      */
     public function save($options, string $localPath)
     {
-        $result = $this->s3Client->getObject([
+        if ($this->s3Client) {
+            $client = $this->s3Client;
+        } else {
+            $client = new S3Client([
+                'version' => $options->getVersion(),
+                'region' => $options->getRegion(),
+                'credentials' => $options->getCredentials()
+            ]);
+        }
+
+        $result = $client->getObject([
             'Bucket' => $options->getBucket(),
             'Key' => $options->getKey()
         ]);
