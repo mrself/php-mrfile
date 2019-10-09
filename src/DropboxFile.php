@@ -3,13 +3,14 @@
 namespace Mrself\File;
 
 use Kunnu\Dropbox\Dropbox;
+use Kunnu\Dropbox\DropboxApp;
 use Mrself\File\Options\DropboxFileOptions;
 use Mrself\Options\Annotation\Option;
 
 class DropboxFile extends AbstractFile implements FileInterface
 {
     /**
-     * @Option()
+     * @Option(required=false)
      * @var Dropbox
      */
     protected $dropboxClient;
@@ -21,6 +22,16 @@ class DropboxFile extends AbstractFile implements FileInterface
      */
     public function save($options, string $localPath)
     {
-        $this->dropboxClient->download($options->getPath(), $localPath);
+        if ($this->dropboxClient) {
+            $client = $this->dropboxClient;
+        } else {
+            $client = new DropboxApp(
+                $options->getClientId(),
+                $options->getSecret(),
+                $options->getToken()
+            );
+        }
+
+        $client->download($options->getPath(), $localPath);
     }
 }
