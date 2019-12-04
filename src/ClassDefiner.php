@@ -49,7 +49,9 @@ class ClassDefiner
         return [
             'ftp' => FtpFile::class,
             'http' => HttpFile::class,
-            'local' => LocalFile::class
+            'local' => LocalFile::class,
+            's3' => S3File::class,
+            'dropbox' => DropboxFile::class
         ];
     }
 
